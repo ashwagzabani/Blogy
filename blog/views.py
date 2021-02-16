@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
@@ -46,9 +46,9 @@ def signup(request):
             user = form.save()
             login(request, user)
             print('HEY', user.username)
-            return HttpResponseRedirect('/user/'+str(user))
+            return HttpResponseRedirect('/')
         else:
-            HttpResponse('<h1>Try Again</h1>')
+            return HttpResponse('<h1>Try Again</h1>')
     else:
         form = SignUpForm()
         return render(request, 'signup.html', {'form': form})
