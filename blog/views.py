@@ -13,29 +13,29 @@ def home(request):
     return render(request, 'index.html', {'posts': last_twenty})
 
 
-def logIn(request):
-    if request.method == 'POST':
-        # if post, then authenticate (user submitted username and password)
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    # return HttpResponse('<h1>Success</h1>')
-                    print(user.id)
-                    return HttpResponseRedirect('/', user.id)
-                else:
-                    HttpResponse('<h1>Try Again</h1>')
+# def logIn(request):
+#     if request.method == 'POST':
+#         # if post, then authenticate (user submitted username and password)
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 if user.is_active:
+#                     login(request, user)
+#                     # return HttpResponse('<h1>Success</h1>')
+#                     print(user.id)
+#                     return HttpResponseRedirect('/',user.id)
+#                 else:
+#                     HttpResponse('<h1>Try Again</h1>')
 
-                    # print("The account has been disabled.")
-            else:
-                print("The username and/or password is incorrect.")
-    else:
-        form = LoginForm()
-    return render(request, 'logIn.html', {'form': form})
+#                     # print("The account has been disabled.")
+#             else:
+#                 print("The username and/or password is incorrect.")
+#     else:
+#         form = LoginForm()
+#     return render(request, 'logIn.html', {'form': form})
 
 
 # def logIn(request):
