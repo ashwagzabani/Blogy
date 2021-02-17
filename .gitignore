@@ -1,0 +1,8 @@
+# Django #
+
+.env
+*/__pycache__/*
+
+# /blog/migrations/*
+
+secrets.sh
