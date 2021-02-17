@@ -7,10 +7,10 @@ from django.contrib import messages
 from .models import Post
 
 
-def home (request):
+def home(request):
     last_twenty = Post.objects.all().order_by('-id')[:3]
     # last_twenty=Post.objects.all()
-    return render(request, 'index.html', {'posts':last_twenty})
+    return render(request, 'index.html', {'posts': last_twenty})
 
 
 def logIn(request):
@@ -26,7 +26,7 @@ def logIn(request):
                     login(request, user)
                     # return HttpResponse('<h1>Success</h1>')
                     print(user.id)
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/', user.id)
                 else:
                     HttpResponse('<h1>Try Again</h1>')
 
@@ -48,14 +48,13 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            print('HEY', user.username)
+            print('HEY', user.username, 'id ', user.id)
             # HttpResponse('<h1>Success</h1>')
             # return HttpResponseRedirect('')
-            return HttpResponse('<h1>Success</h1>')
+            return HttpResponseRedirect('/', user.id)
         else:
             print('try again')
             HttpResponse('<h1>Try Again</h1>')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
-

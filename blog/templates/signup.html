@@ -1,20 +1,18 @@
 {% extends 'base_form.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block content %}
-<p class="login-card-description">Sign into your account</p>
+{% block body %}
+<p class="login-card-description">Craete your account now!</p>
 <form method="POST">
     <div class="form-group">
         {% csrf_token %}
         {{ form|crispy }}
-        <div class="form-group">
-            <button type="submit">Sign up</button>
-        </div>
+        <button class="btn btn-block login-btn mb-4" type="submit">Submit</button>
     </div>
 </form>
-<div class="border-top pt-3">
-    {% if message %}
-    <small class="test-mute">{{ message }}</small>
-    {% endif %}
+<div class="border-bottom pt-3">
+    <small class="test-mute">
+        Do you Have an account? <a href="{%url 'logIn'%}">Log In</a>
+    </small>
 </div>
 {% endblock %}
