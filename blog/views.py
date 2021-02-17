@@ -24,6 +24,7 @@ def logIn(request):
                 if user.is_active:
                     login(request, user)
                     # return HttpResponse('<h1>Success</h1>')
+                    print(user.id)
                     return HttpResponseRedirect('/')
                 else:
                     HttpResponse('<h1>Try Again</h1>')
