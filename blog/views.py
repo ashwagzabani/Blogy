@@ -41,6 +41,9 @@ def home(request):
 # def logIn(request):
 #     return render(request, 'logIn.html')
 
+def userPostsList(request):
+    return render(request, 'userPostsList.html')
+
 
 def signup(request):
     if request.method == 'POST':
