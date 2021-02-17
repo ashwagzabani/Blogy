@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
@@ -21,18 +21,19 @@ def logIn(request):
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             if user is not None:
-                if user. is_active:
+                if user.is_active:
                     login(request, user)
-                    messages.success(
-                        request, f'Account created for {username} success!')
+                    # return HttpResponse('<h1>Success</h1>')
                     return HttpResponseRedirect('/')
                 else:
-                    print("The account has been disabled.")
+                    HttpResponse('<h1>Try Again</h1>')
+
+                    # print("The account has been disabled.")
             else:
                 print("The username and/or password is incorrect.")
     else:
         form = LoginForm()
-        return render(request, 'logIn.html', {'form': form})
+    return render(request, 'logIn.html', {'form': form})
 
 
 # def logIn(request):
@@ -46,9 +47,12 @@ def signup(request):
             user = form.save()
             login(request, user)
             print('HEY', user.username)
-            return HttpResponseRedirect('/')
+            # HttpResponse('<h1>Success</h1>')
+            # return HttpResponseRedirect('')
+            return HttpResponse('<h1>Success</h1>')
         else:
-            return HttpResponse('<h1>Try Again</h1>')
+            print('try again')
+            HttpResponse('<h1>Try Again</h1>')
     else:
         form = SignUpForm()
-        return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})
