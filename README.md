@@ -90,6 +90,9 @@ python manage.py runserver
 - As a User, I should be able to share any articles via social networking like: twitter or Facebook
 - As a logged User, I should be able to replay on exist comments
 
+## Refrence
+* https://docs.djangoproject.com/en/3.1/ref/models/querysets/
+
 ## Collaborating
 - <a href= 'https://git.generalassemb.ly/ashwagzabani'>Ashwag Zabani</a>
 - <a href='https://git.generalassemb.ly/bushra-mulla'>Bushra Mulla</a>
