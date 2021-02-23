@@ -15,7 +15,7 @@ def add_variable_to_context(request):
 
 def totalAnnouncement(request):
     notPublishedPosts = Post.objects.filter(isPublish='notPublished').count()
-    reports = report.objects.all().count()
+    reports = report.objects.filter(is_archived=False).count()
     totel = notPublishedPosts + reports
     # print(totel)
     return {'totalAnnouncement': totel}
