@@ -8,7 +8,7 @@
             {% if 'create' in request.path|cut:'/'%}
             <h3 style="float: left;">Create New Post</h3>
             {% else %}
-            <h3 style="float: left;">Your Post</h3>
+            <h3 style="float: left;">Edit Your Post</h3>
             {% endif %}
             <a href="{{request.META.HTTP_REFERER|escape}}"><i class="fa fa-times"
                     style="font-size: 20pt; float: right; color: #E26E8C; padding-top: 5px;"></i></a>
@@ -22,8 +22,13 @@
             <input name='draft' type="submit" value="Save as draft" class="gradient-button gradient-button-2"
                 style="float: left; width: auto;">
             {%endif%}
+            {% if 'create' in request.path|cut:'/'%}
             <input type="submit" name='send' value="Send" class="gradient-button gradient-button-3"
                 style="float: right;">
+            {% else %}
+            <input type="submit" name='send' value="Save" class="gradient-button gradient-button-3"
+                style="float: right;">
+            {%endif%}
         </div>
     </div>
     </div>
