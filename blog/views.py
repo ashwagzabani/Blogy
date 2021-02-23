@@ -17,9 +17,17 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 def home(request):
+    allPost = Post.objects.all()
+    allUsers = User.objects.all()
+    allComments = comment.objects.all()
     last_twenty = Post.objects.filter(
         isPublish='published').select_related('author__user_profile').order_by('-id')[:20]
-    return render(request, 'index.html', {'posts': last_twenty})
+    return render(request, 'index.html', {
+        'posts': last_twenty,
+        'allPost': allPost,
+        'allUsers': allUsers,
+        'allComments': allComments
+    })
 
 
 def signup(request):
@@ -44,6 +52,10 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+def authoreProfile(request, user_id):
+    user = User.objects.get(id=user_id)
+    posts = Post.objects.filter(author=user)
+    return render(request, 'user/show.html', {'user': user})
 
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
@@ -66,12 +78,9 @@ class PostCreate(CreateView):
         return HttpResponseRedirect('/user/posts/')
 
 
-
-
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.isPublish == 'draft':
@@ -84,6 +93,13 @@ class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
 
         self.object.save()
         return HttpResponseRedirect('/post/' + str(self.object.pk))
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
 
 
 @method_decorator(login_required, name='dispatch')
@@ -98,8 +114,8 @@ class PostDelete(DeleteView):
             return True
         else:
             return False
-        
- 
+
+
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
@@ -279,10 +295,9 @@ def allposts():
     return published
 
 
-def postDetails(request, Post_id):
-    posts = Post.objects.get(
-        id=Post_id)
-    return render(request, 'post/publish_manage.html', {'posts': allposts(), 'post': posts})
+def postDetails(request, post_id):
+    posts = Post.objects.get(id=post_id)
+    return render(request, 'post/publish_manage.html', {'posts': allposts(), 'postDetails': posts})
 
 
 def update_published(request, Post_id):
@@ -308,7 +323,7 @@ def refused(request):
 
 
 def notpublish(request):
-    notpublish = Post.objects.filter(isPublish='notpublish')
+    notpublish = Post.objects.filter(isPublish='notPublished')
     return render(request, 'post/publish_manage.html', {'posts': notpublish})
 
 
