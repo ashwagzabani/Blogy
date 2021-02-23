@@ -15,15 +15,15 @@
         <div class="container">
           <div class="row align-items-start">
             <div class="col">
-              <a onclick="location.href='{% url 'blog-published' %}'">published
+              <a onclick="location.href='{% url 'blog-published' %}'" style="cursor: pointer;">published
                 <span class="badge badge-light">{{countpost}}</span></a>
             </div>
             <div class="col">
-              <a onclick="location.href='{% url 'notpublish' %}'">not publish
+              <a onclick="location.href='{% url 'notpublish' %}'" style="cursor: pointer;">not publish
                 <span class="badge badge-light">{{countnotpublish}}</span></a>
             </div>
             <div class="col">
-              <a onclick="location.href='{% url 'refused' %}'">refused
+              <a onclick="location.href='{% url 'refused' %}'" style="cursor: pointer;">refused
                 <span class="badge badge-light">{{countrefused}}</span></a>
             </div>
           </div>
