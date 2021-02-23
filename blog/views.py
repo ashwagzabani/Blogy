@@ -129,11 +129,11 @@ def profile(request, username):
     return render(request, 'profile.html', {'username': username, 'post': post})
 
 
-def category_view(request, category_name):
-    categorys_post = categorys.objects.get(category_name=category_name)
+def category_view(request, pk):
+    categorys_post = categorys.objects.get(id=pk)
     post = Post.objects.filter(
         category_id=categorys_post, isPublish='published').order_by('-id')
-    return render(request, 'category/category.html', {'category_name': category_name, 'posts': post, 'category_info': categorys_post})
+    return render(request, 'category/category.html', {'posts': post, 'category_info': categorys_post})
 
 
 def userPostsList(request):
@@ -306,20 +306,18 @@ def postDetails(request, post_id):
     return render(request, 'post/publish_manage.html', {'posts': allposts(), 'postDetails': posts})
 
 
-def update_published(request, Post_id):
-    postDetails = Post.objects.get(
-        id=Post_id)
+def update_published(request, post_id):
+    postDetails = Post.objects.get(id=post_id)
     postDetails.isPublish = 'published'
     postDetails.save()
-    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+    return HttpResponseRedirect('/published/', {'posts': allposts()})
 
 
-def update_refuse(request, Post_id):
-    postDetails = Post.objects.get(
-        id=Post_id)
-    postDetails.isPublish = 'refuse'
+def update_refuse(request, post_id):
+    postDetails = Post.objects.get(id=post_id)
+    postDetails.isPublish = 'refused'
     postDetails.save()
-    return HttpResponseRedirect('/blog-published/', {'posts': allposts()})
+    return HttpResponseRedirect('/published/', {'posts': refused(request)})
 
 
 def refused(request):
