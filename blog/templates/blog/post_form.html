@@ -19,15 +19,15 @@
         </div>
         <div class="card-footer">
             {% if 'create' in request.path|cut:'/' or post.isPublish == 'draft'%}
-            <input name='draft' type="submit" value="Save as draft" class="gradient-button gradient-button-2"
-                style="float: left; width: auto;">
+            <button name='draft' type="submit" class="gradient-button gradient-button-2"
+                style="float: left; width: auto;"> <i class="fa fa-archive"></i> SAVE AS DRAFT </button>
             {%endif%}
             {% if 'create' in request.path|cut:'/'%}
-            <input type="submit" name='send' value="Send" class="gradient-button gradient-button-3"
-                style="float: right;">
+            <button type="submit" name='send' class="gradient-button gradient-button-3" style="float: right;"><i
+                    class="fa fa-firstdraft"></i> SEND </button>
             {% else %}
-            <input type="submit" name='send' value="Save" class="gradient-button gradient-button-3"
-                style="float: right;">
+            <button type="submit" name='send' class="gradient-button gradient-button-3" style="float: right;"><i
+                    class="fa fa-cloud-upload "></i> SAVE </button>
             {%endif%}
         </div>
     </div>
