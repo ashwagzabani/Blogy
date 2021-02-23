@@ -1,3 +1,4 @@
+from .models import categorys
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -54,7 +55,6 @@ def all(request):
         'user_id__user_profile').all().order_by('-id')
     return {'allReport': reports}
 
-from .models import categorys
 
 def add_variable_to_context(request):
     return {

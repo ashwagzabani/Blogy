@@ -52,10 +52,12 @@ def post_show(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'post/show.html', {'post': post})
 
+
 def authoreProfile(request, user_id):
     user = User.objects.get(id=user_id)
     posts = Post.objects.filter(author=user)
     return render(request, 'user/show.html', {'user': user})
+
 
 @method_decorator(login_required, name='dispatch')
 class PostCreate(CreateView):
@@ -70,10 +72,13 @@ class PostCreate(CreateView):
         # print('----------form----------;,', self.data)
         # print('selffffffffffff;,', self.request.POST)
         self.object.author_id = self.request.user.id
+
         if 'draft' in self.request.POST:
             print('yaaaaaaaaaaaaaaaaaaaaaaaaaaah')
             self.object.isPublish = 'draft'
-
+        elif self.request.user.is_staff:
+            print('yeas he is admin')
+            self.object.isPublish = 'published'
         self.object.save()
         return HttpResponseRedirect('/user/posts/')
 
@@ -81,6 +86,7 @@ class PostCreate(CreateView):
 class PostUpdate(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'post_img', 'category_id']
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.object.isPublish == 'draft':
