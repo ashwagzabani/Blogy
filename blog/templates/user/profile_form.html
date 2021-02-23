@@ -5,7 +5,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div class="card mt-5" style="margin: 0 auto; width: 55%;">
+    <div class="card mt-5" style="margin: 0 auto; width: 58%;">
         <div class="card-header">
             {% if 'create' in request.path|cut:'/'%}
             <h3 style="float: left;">Create Your Profile</h3>
@@ -15,7 +15,10 @@
                     style="font-size: 20pt; float: right; color: #E26E8C; padding-top: 5px;"></i></a>
             {% endif %}
         </div>
-        <div class="card-body"> {{ form|crispy }}
+        <div class="card-body"> 
+            {{ form|crispy }}
+            {{ form.media}}
+
         </div>
         <div class="card-footer">
 
