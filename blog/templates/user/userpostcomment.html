@@ -1,0 +1,10 @@
+{%block postsComment%}
+
+<div class="col-md">
+  {% for post in posts %}
+  <ul class="pr-2">
+    <a class="text-dark" href="{% url 'blog-post-show' post.id %}">{{post.Post_id.title}}</a>
+  </ul>
+  {% endfor %}
+</div>
+{%endblock%}

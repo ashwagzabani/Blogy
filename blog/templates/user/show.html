@@ -103,35 +103,25 @@
 
 <div class="tab-content mt-5">
   <div id="authorPost" class=" tab-pane active "><br>
+    {% if authorPost%}
     {%block authorPost%}
     {% include "blog/post_cards.html" with posts=authorPost %}
     {%endblock%}
+    {% endif %}
   </div>
   <div id="authorLikes" class=" tab-pane active "><br>
+    {% if authorLikes%}
     {%block authorLikes%}
     {% include "blog/post_cards.html" with posts=authorLikes %}
     {%endblock%}
+    {% endif%}
   </div>
-  <!-- <div id="authorComments" class=" tab-pane active "><br>
+  <div id="authorComments" class=" tab-pane active "><br>
     {%block postsComment%}
-    {% include "blog/post_cards.html" with posts=postsComment.Post_id %}
+    {% include "./userpostcomment.html" with posts=usercomments %}
     {%endblock%}
-  </div> -->
-</div>
-
-
-<!-- <div class="row mb-5">
-  <div class="col-md">
-      <h3 class=" mb-4 pb-3 mt-5">Comments</h3>
-      {% for post in authorComments %}
-      <ul class="pr-2">
-          <a class="text-dark" href="{% url 'blog-post-show' post.id %}">{{post.Post_id.title}}</a>
-      </ul>
-      {% empty %}
-      <h4 class="text-center mb-5">no posts</h4>
-      {% endfor %}
   </div>
-</div> -->
+</div>
 
 
 {% endblock %}
