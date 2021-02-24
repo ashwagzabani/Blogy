@@ -56,11 +56,12 @@
             </button>
           </div> -->
           <p>Joined: {{user.date_joined}}</p>
-            <a class="gradient-button gradient-button-3" href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
-              style="width: auto; color: white; text-decoration: none; padding: 15px;">
-              <i class="fal fa-envelope"></i> Content With me</a>
+          <a class="gradient-button gradient-button-3"
+            href="mailto: {{ user.email}} ?subject=your title&body=TThe message"
+            style="width: auto; color: white; text-decoration: none; padding: 15px;">
+            <i class="fal fa-envelope"></i> Content With me</a>
           <hr>
-          
+
           <p class="dark-grey-text mt-4 text-justify">{{user.user_profile.about_me | safe}}</p>
           <h5 class="text-right font-weight-bold dark-grey-text mt-5">
             <em>{{user.first_name}} {{user.last_name}}</em>
@@ -68,8 +69,8 @@
           <p class="text-right font-weight-bold dark-grey-text mt-1">
             <em>{{user.user_profile.position}}</em>
           </p>
-         
-        
+
+
         </div>
         <!--Grid column-->
     </div>
@@ -85,17 +86,17 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a href="#posts">
-      <a class="nav-link" id="authorPosts" href="{{ request.get_full_path }}/posts/">
+      <a class="nav-link" id="authorPosts" href="{% url 'authorePosts' user.id%}">
         Posts {{authorPost.count}}</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorLikes">
-      <a class="nav-link" id="authorLikes" href="{{ request.get_full_path }}/likes/">
+      <a class="nav-link" id="authorLikes" href="{% url 'authoreLikes' user.id%}">
         Likes {{authorLikes.count}}</a></a>
   </li>
   <li class="nav-item">
     <a href="#authorComments">
-      <a class="nav-link" id="authorCommines" href="{{ request.get_full_path }}/comments/">
+      <a class="nav-link" id="authorCommines" href="{% url 'usercomments' user.id%}">
         Commines {{authorComments.count}}</a></a>
   </li>
 </ul>
@@ -132,5 +133,5 @@
   </div>
 </div> -->
 
-  
+
 {% endblock %}
