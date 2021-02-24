@@ -36,31 +36,10 @@
                 </div>
                 <p class="dark-grey-text article">{{comment.content}}</p>
                 <div class="form{{comment.id}} form">
-<<<<<<< HEAD
                   {% block edit %}
                   {% include "./editcomment.html" with comment=comment%}
                   {%endblock%}
                 </div>
-=======
-          {% block edit %}
-          {% include "./editcomment.html" with comment=comment%}
-          {%endblock%}
-        </div>
-      </div>
-      {% if comment.user_id == request.user %}
-          <ul class=postButton>
-            <li>
-              <div class="gradient-button gradient-button-2 edit{{comment.id}}"
-                style="text-decoration: none; color: white;"><i class="fa fa-edit"></i> Edit</div>
-            </li>
-            <li>
-              <div class="gradient-button gradient-button-1 delet{{comment.id}}" href="{% url 'blog-post-delete' post.id %}"
-                style="text-decoration: none; color: white;"><i class="fa fa-trash"></i> DELETE</div>
-
-            </li>
-          </ul>
-      {% endif %}
->>>>>>> 0d99b5448c9ce10780e452d977bd889f7424710c
               </div>
               {% if comment.user_id == request.user %}
               <ul class=postButton>
@@ -108,12 +87,8 @@
         {% endblock %}
         {% block script%}
         <script>
-<<<<<<< HEAD
           $('.form').hide()
           comment_id = '{{comment.id}}'
-=======
-          comment_id='{{comment.id}}'
->>>>>>> 0d99b5448c9ce10780e452d977bd889f7424710c
           $(".submentComment").on("click", function () {
             var post_id = "{{post.id}}";
             var content = $(`.content${post_id}`).val();
@@ -144,7 +119,6 @@
               },
             });
           });
-<<<<<<< HEAD
           // $('.delet{{comment.id}}'.on('click', function(){
           //   if (confirm('Are you sure you want to delete?')){
           //     $.ajax({
@@ -166,30 +140,6 @@
           //     })
           //   }
           // }
-=======
-
-
-          $('.delet{{comment.id}}'.on('click', function(){
-            if (confirm('Are you sure you want to delete?')){
-              $.ajax({
-                type: "POST",
-                url: `/comment/delete/`,
-                data: {
-                  csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-                  comment_id: comment_id,
-                },
-                dataType: "json",
-                beforeSend: function () {
-                  $(".delet{{comment.id}}").addClass("disabled").text("delete...");
-                },
-                success: function (data) {
-                  window.location.reload();
-                  // $(`.content${post_id}`).val("");
-                  // $(".editComment").removeClass("disabled").text("Submit");
-                },
-            })
-          }}
->>>>>>> 0d99b5448c9ce10780e452d977bd889f7424710c
         </script>
       </div>
     </div>
