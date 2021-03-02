@@ -17,7 +17,7 @@ Designing the Entity Relationship Diagram by <a href= 'https://app.diagrams.net/
 * HTML
 * CSS
 * Bootstrap
-* Postages 
+* Postgres 
 * Python 
 * Django 
 * Ajax
